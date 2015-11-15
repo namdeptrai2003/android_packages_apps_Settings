@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2018 Havoc-OS
+     Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,15 +14,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources> 
-    <!-- DSLV colors -->
-      <color name="dslv_icon_dark">#80000000</color> 
-    <color name="dslv_float_background_color">#ff1b1f23</color> 
- 
-    <!-- DSLV fab color --> 
-    <color name="floating_action_button_touch_tint">#80ffffff</color> 
- 
-    <color name="fab_ripple">#1fffffff</color><!-- 12% white --> 
-    <color name="fab_shape">?android:attr/colorAccent</color> 
 
-</resources> 
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/floating_action_button_touch_tint">
+    <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/fab_accent"/>
+</ripple>
