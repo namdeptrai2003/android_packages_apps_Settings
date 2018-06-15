@@ -41,7 +41,7 @@ import android.widget.TextView;
 import com.android.settings.slim.util.ShortcutPickerHelper.AppExpandableAdapter.GroupInfo;
 import com.android.settings.R;
 
-import com.android.internal.util.slim.AppHelper;
+import com.android.internal.util.havoc.AppHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;

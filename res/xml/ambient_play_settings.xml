@@ -22,9 +22,13 @@
             android:enabled="false"
             android:layout="@layout/ambient_play_illustration" />
   
-        <SwitchPreference
-            android:key="ambient_play_lockscreen"
-            android:defaultValue ="false"
-            android:title="@string/ambient_play_lockscreen_title" />
+           <SwitchPreference
+            android:key="ambient_play"
+            android:title="@string/ambient_play_title" />
+   
+         <SwitchPreference
+             android:key="ambient_play_lockscreen"
+             android:title="@string/ambient_play_lockscreen_title"
+             android:dependency="ambient_play" />
 
 </PreferenceScreen>

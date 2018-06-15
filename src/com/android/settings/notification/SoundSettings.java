@@ -27,6 +27,7 @@ import android.preference.SeekBarVolumizer;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.content.res.Resources;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -36,6 +37,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import android.support.v7.preference.PreferenceScreen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +49,7 @@ public class SoundSettings extends DashboardFragment {
     //private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final int REQUEST_CODE = 200;
+    private static final String AMBIENT_PLAY_SETTINGS_KEY = "ambient_play_settings";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -54,6 +57,7 @@ public class SoundSettings extends DashboardFragment {
     private final IncreasingRingVolumePreferenceCallback mIncreasingRingVolumeCallback =
         new IncreasingRingVolumePreferenceCallback();
     private final H mHandler = new H();
+    private Preference mAmbientPlay;
 
     private RingtonePreference mRequestPreference;
 
@@ -71,12 +75,22 @@ public class SoundSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Context mContext = getActivity();
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        boolean mAmbientPlaySupported = mContext.getResources().getBoolean(
+                    com.android.internal.R.bool.config_supportAmbientPlay);
+
         if (savedInstanceState != null) {
             String selectedPreference = savedInstanceState.getString(SELECTED_PREFERENCE_KEY, null);
             if (!TextUtils.isEmpty(selectedPreference)) {
                 mRequestPreference = (RingtonePreference) findPreference(selectedPreference);
             }
         }
+        if (mAmbientPlaySupported) {
+             mAmbientPlay = (Preference) findPreference(AMBIENT_PLAY_SETTINGS_KEY);
+         } else {
+             prefScreen.removePreference(mAmbientPlay);
+         }
     }
 
     @Override
@@ -248,7 +262,6 @@ public class SoundSettings extends DashboardFragment {
         controllers.add(new DockAudioMediaPreferenceController(context, fragment, lifecycle));
         controllers.add(new BootSoundPreferenceController(context));
         controllers.add(new EmergencyTonePreferenceController(context, fragment, lifecycle));
-
         return controllers;
     }
 
