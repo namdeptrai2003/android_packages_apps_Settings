@@ -65,7 +65,7 @@
     <string name="reset_stats_msg">Battery history stats are going to be reset</string> 
 
     <!-- Slim DSLV -->
-    <string name="shortcut_action_none">None</string>
+    <string name="shortcut_action_none">Default</string>
     <string name="shortcut_action_longpress">Longpress:</string>
     <string name="shortcut_action_select_action_longpress">Choose longpress action:</string>
     <string name="shortcut_action_select_action">Choose action:</string>
