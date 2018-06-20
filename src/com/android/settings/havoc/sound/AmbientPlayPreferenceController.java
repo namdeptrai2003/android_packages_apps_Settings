@@ -43,7 +43,7 @@ public class AmbientPlayPreferenceController extends AbstractPreferenceControlle
     @Override
     public void updateState(Preference preference) {
         int value = Settings.Secure.getInt(
-                mContext.getContentResolver(), Settings.Secure.AMBIENT_PLAY, 1);
+                mContext.getContentResolver(), Settings.Secure.AMBIENT_PLAY, 0);
         ((SwitchPreference) preference).setChecked(value != 0);
     }
 
